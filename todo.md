@@ -1,5 +1,4 @@
 - Option to disable/re-enable autoscroll
-- Check whether it's actually pulling the right stuff out
 - Find and highlight the text.
 - Footer
 - About page
