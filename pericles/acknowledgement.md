@@ -1,3 +1,5 @@
+https://www.folger.edu/explore/shakespeares-works/pericles/read/1/CHO/
+
 Pericles, Prince of Tyre
 by William Shakespeare
 Edited by Barbara A. Mowat and Paul Werstine

@@ -8,17 +8,28 @@
 </head>
 <body>
   <h1>Monkeys typing Shakespeare</h1>
-  <div id="left">
-    <h2>Live monkeys:</h2>
-    <div id="output"></div>
-  </div>
-  <div id="right">
-    <div id="stats">
-      <h2>Stats:</h2>
-      <p>Uptime: </p><p id="uptime"></p>
-      <p>Characters typed: </p><p id="totalChars"></p>
-      <p>Longest match: </p><p id="longestLength"></p>
-      <p id="longestText"></p>
+  <div id="container">
+    <div id="left">
+      <h2>Live monkeys:</h2>
+      <div id="output"></div>
+    </div>
+
+    <div id="right">
+      <div id="stats">
+        <h2>Stats:</h2>
+        <p>Uptime: </p><p id="uptime"></p>
+        <p>Characters typed: </p><p id="totalChars"></p>
+        <p>Longest match: </p><p id="longestLength"></p>
+        <p id="longestText"></p>
+      </div>
+
+      <div id="txt">
+        <iframe 
+          src="./pericles/pericles.txt"
+          title="Pericles text file">
+        </iframe>
+      </div>
+
     </div>
   </div>
 

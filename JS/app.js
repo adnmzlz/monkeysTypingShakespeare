@@ -5,6 +5,8 @@ let longestOutput = '';
 let currentString = '';
 let totalCharacters = 0;
 
+const htmlOutput = document.getElementById("output");
+
 const characters = [
   'A', 'C', 'T', ' ', '1', '\n', '=', 'h',  'o', 'r',
   'u', 's', '[', 'E', 'n', 't',  'e', 'G',  'w', '.',
@@ -66,10 +68,11 @@ function run() {
     }
   }
 
-  document.getElementById("output").textContent += currentString;
+  htmlOutput.textContent += currentString;
+  htmlOutput.scrollTop = htmlOutput.scrollHeight;
   currentString = '';
 
-  setTimeout(run, Math.max(20, Math.floor(Math.random() * 80)));
+  setTimeout(run, Math.max(10, Math.floor(Math.random() * 50)));
 }
 
 run();
