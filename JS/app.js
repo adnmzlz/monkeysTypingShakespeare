@@ -1,12 +1,14 @@
 import { pericles } from "./pericles.js";
 
+const htmlOutput = document.getElementById("output"); // Live view of the monkeys
+const iFrame = document.getElementById("iFrame");
+
 let isRunning = true;
-let longestOutput = '';
-let currentString = '';
-let totalCharacters = 0;
+let longestOutput = ''; // Longest collection of characters that exist within the play
+let currentString = ''; // Current collection of random characters we are checking against the full play
+let totalCharacters = 0; // Total characters typed
 
-const htmlOutput = document.getElementById("output");
-
+// The characters we are allowing our monkeys to be able to use.  Obtained by getting a set of characters from the Pericles string.
 const characters = [
   'A', 'C', 'T', ' ', '1', '\n', '=', 'h',  'o', 'r',
   'u', 's', '[', 'E', 'n', 't',  'e', 'G',  'w', '.',
@@ -18,6 +20,7 @@ const characters = [
   'Q', '5', 'V', '6'
 ];
 
+// Function to return uptime for us to display.
 function getReadableUptime() {
   const totalSeconds = performance.now() / 1000
   // const nodeTotalSeconds = process.uptime(); << for server
@@ -49,29 +52,54 @@ function getReadableUptime() {
   return `${hrs}:${mins}:${secs}`;
 }
 
+// Function to find and highlight the longestOutput
+function findHighlightIframe(longestOutput) {
+  const innerDoc = iFrame.contentDocument || iFrame.contentWindow.document;
+  const body = innerDoc.body;
+
+  // 1. Highlight by replacing text with a marked span
+  const originalHTML = body.innerHTML;
+  const highlightedHTML = originalHTML.replace(
+    new RegExp(longestOutput, 'gi'), 
+    (match) => `<mark id="find-result">${match}</mark>`
+  );
+  body.innerHTML = highlightedHTML;
+
+  // 2. Scroll to the first match
+  const element = innerDoc.getElementById('find-result');
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
 function run() {
   if (!isRunning) return;
-
+  
+  // Display uptime
   document.getElementById("uptime").textContent = getReadableUptime();
 
   while (pericles.includes(currentString)) {
+    // Do this check first so we don't add an extra erroneous character to the longestOutput string.
     if (currentString.length > longestOutput.length) {
       longestOutput = currentString;
       document.getElementById("longestText").textContent = longestOutput;
 
       longestLength = output.length;
       document.getElementById("longestLength").textContent = longestOutput.length;
+
+      findHighlightIframe(longestOutput);
     }
+
     currentString += characters[Math.floor(Math.random() * 74)];
     totalCharacters++;
     document.getElementById("totalChars").textContent = totalCharacters;
-
   }
 
-  htmlOutput.textContent += currentString;
-  htmlOutput.scrollTop = htmlOutput.scrollHeight;
-  currentString = '';
+  htmlOutput.textContent += currentString; // Update at the conclusion of the longest string - saves on performance and adds a bit of randomness to the monkeybashes.
+  htmlOutput.scrollTop = htmlOutput.scrollHeight; // Auto-scrolls the output as it's added for neatness.  Will find a way to toggle this so people can scroll up if they want.
+  currentString = ''; // Reset the current string
 
+  // Avoid cpu meltage/add randomness to the monkeybashes.
   setTimeout(run, Math.max(10, Math.floor(Math.random() * 50)));
 }
 
