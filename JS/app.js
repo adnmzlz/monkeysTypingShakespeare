@@ -55,10 +55,6 @@ function run() {
   document.getElementById("uptime").textContent = getReadableUptime();
 
   while (pericles.includes(currentString)) {
-    currentString += characters[Math.floor(Math.random() * 74)];
-    totalCharacters++;
-    document.getElementById("totalChars").textContent = totalCharacters;
-
     if (currentString.length > longestOutput.length) {
       longestOutput = currentString;
       document.getElementById("longestText").textContent = longestOutput;
@@ -66,6 +62,10 @@ function run() {
       longestLength = output.length;
       document.getElementById("longestLength").textContent = longestOutput.length;
     }
+    currentString += characters[Math.floor(Math.random() * 74)];
+    totalCharacters++;
+    document.getElementById("totalChars").textContent = totalCharacters;
+
   }
 
   htmlOutput.textContent += currentString;
