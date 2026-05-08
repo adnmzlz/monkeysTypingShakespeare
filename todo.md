@@ -1,6 +1,4 @@
 - Option to disable/re-enable autoscroll
 - Find and highlight the text.
-- Footer
 - About page
-- Favicon
 - Update styling
