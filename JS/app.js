@@ -1,7 +1,14 @@
 import { pericles } from "./pericles.js";
 
 let isRunning = true;
-const htmlOutput = document.getElementById("output"); // Live view of the monkeys
+
+// Modal stuff
+const modal = document.getElementById("about-modal");
+const aboutBtn = document.getElementById("aboutBtn");
+const span = document.getElementsByClassName("close")[0];
+
+// Live view of the monkeys
+const htmlOutput = document.getElementById("output"); 
 
 // For findHighlightIframe() function
 const iFrame = document.getElementById("iFrame");
@@ -22,6 +29,21 @@ const characters = [
   'D', '?', 'K', '2', '(', ')',  '3', '4',  'Z', '"',
   'Q', '5', 'V', '6'
 ];
+
+// About button - opens the modal
+aboutBtn.onclick = function() {
+  modal.style.display = "block";
+}
+// About modal - close button
+span.onclick = function() {
+  modal.style.display = "none";
+}
+// Close modal when clicking outside it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
 // Function to return uptime for us to display.
 function getReadableUptime() {

@@ -9,8 +9,22 @@
 </head>
 <body>
   <header>
-    <h1>Monkeys typing Shakespeare</h1>
+    <span>
+      <h1>Monkeys typing Shakespeare</h1>
+      <button id="aboutBtn">ℹ️</button>
+    </span>
   </header>
+
+  <div id="about-modal" class="modal">
+    <div class="modal-header">
+      <h2>About</h2>
+      <span class="close">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p>For performance's sake, and to give the monkeys a fighting chance, I decided to restrict the output to one Shakespeare play: Pericles.  (My dad is a big Marlowe fan, and this is his favourite of his works.)</p>
+      <p>Recommended further reading: <a href="https://www.youtube.com/watch?v=QTCpCAVjfBQ">https://www.youtube.com/watch?v=QTCpCAVjfBQ</a></p>
+    </div>
+  </div>
 
   <div id="container">
     <aside>
@@ -45,10 +59,7 @@
     <p>Created by <a href="https://github.com/adnmzlz" target="_blank">adnmzlz</a> &copy; 2026</p>
     <p>Source text taken from <a href="https://www.folger.edu/explore/shakespeares-works/pericles/" target="_blank">The Folger Shakespeare Library</a> </p>
     <p>Capital letters provided by the shift key</p>
-
   </footer>
-
-
 
   <script src="./JS/app.js" type="module"></script>
 </body>
