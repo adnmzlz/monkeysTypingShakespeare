@@ -1,4 +1,3 @@
 - Option to disable/re-enable autoscroll
-- Find and highlight the text.
 - About page
 - Update styling

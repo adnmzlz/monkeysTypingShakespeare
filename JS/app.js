@@ -1,14 +1,17 @@
 import { pericles } from "./pericles.js";
 
-const htmlOutput = document.getElementById("output"); // Live view of the monkeys
-const iFrame = document.getElementById("iFrame");
-
 let isRunning = true;
+const htmlOutput = document.getElementById("output"); // Live view of the monkeys
+
+// For findHighlightIframe() function
+const iFrame = document.getElementById("iFrame");
+let ogIframeContent = null;
+
 let longestOutput = ''; // Longest collection of characters that exist within the play
 let currentString = ''; // Current collection of random characters we are checking against the full play
 let totalCharacters = 0; // Total characters typed
 
-// The characters we are allowing our monkeys to be able to use.  Obtained by getting a set of characters from the Pericles string.
+// The characters we are allowing our monkeys to be able to use.  Obtained by getting a set of all the characters used in the Pericles string.
 const characters = [
   'A', 'C', 'T', ' ', '1', '\n', '=', 'h',  'o', 'r',
   'u', 's', '[', 'E', 'n', 't',  'e', 'G',  'w', '.',
@@ -53,22 +56,36 @@ function getReadableUptime() {
 }
 
 // Function to find and highlight the longestOutput
-function findHighlightIframe(longestOutput) {
+function findHighlightIframe(longestOutput) {  
   const innerDoc = iFrame.contentDocument || iFrame.contentWindow.document;
   const body = innerDoc.body;
 
-  // 1. Highlight by replacing text with a marked span
-  const originalHTML = body.innerHTML;
-  const highlightedHTML = originalHTML.replace(
-    new RegExp(longestOutput, 'gi'), 
-    (match) => `<mark id="find-result">${match}</mark>`
-  );
-  body.innerHTML = highlightedHTML;
+  // Original iframe text to reset highlights
+  if (!ogIframeContent ) {
+    ogIframeContent  = body.innerHTML;
+  }
+  body.innerHTML = ogIframeContent;
 
-  // 2. Scroll to the first match
-  const element = innerDoc.getElementById('find-result');
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // ESCAPE special regex characters (like ?, (, ), .) so they don't break the script
+  const escapedOutput = longestOutput.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Apply new highlight, we use a specific ID for the FIRST match to scroll to it
+  let firstMatchFound = false;
+  const regex = new RegExp(`(${escapedOutput})`, 'g');
+  
+  body.innerHTML = body.innerHTML.replace(regex, (match) => {
+    if (!firstMatchFound) {
+      firstMatchFound = true;
+      return `<mark id="first-match" class="highlight">${match}</mark>`;
+    }
+    return `<mark class="highlight">${match}</mark>`;
+  });
+
+  //Scroll to the first match
+  const firstMatchElement = innerDoc.getElementById('first-match');
+  if (firstMatchElement) {
+    // block: 'center' so it doesn't hit the top of the frame
+    firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
