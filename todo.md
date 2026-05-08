@@ -1,3 +1,6 @@
-- Option to disable/re-enable autoscroll
-- About page
+- Option to disable/re-enable autoscroll on output
+- fix padding on output
+- About page/popup
 - Update styling
+
+- Get this hosted
