@@ -1,5 +1,7 @@
 - Bug: sometimes text isn't highlighted in the iframe, but not always.  Seems to only happen in Firefox (Chrome seems to be fine).
 
+- Media query for mobile/narrow screen.
+
 - Localstorage?
 - Update styling?
 
