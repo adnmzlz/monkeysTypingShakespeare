@@ -4,6 +4,7 @@
 - Update styling (esp modal)
 
 - If play/pause, check uptime support
+- Localstorage?
 - Option to disable/re-enable autoscroll on output
 - Support days/years
 
