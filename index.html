@@ -8,20 +8,26 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>">
 </head>
 <body>
+  <!-- HEADING START -->
   <header>
     <span id="heading">
       <h1>Monkeys typing Shakespeare</h1>
       <button id="aboutBtn">ℹ️</button>
     </span>
   </header>
+  <!-- HEADING END -->
 
-  <div id="about-modal" class="modal">
+  <!-- MODAL START -->
+  <dialog id="about-modal" class="modal">
     <div class="modal-header">
       <h2>About</h2>
       <span class="close">&times;</span>
     </div>
     <div class="modal-body">
-      <p>In the interest of giving the monkeys a fighting chance, I decided to restrict the output to one Shakespeare play: Pericles.  (My dad is a big Marlowe fan, and this is his favourite of his works.)</p>
+      <p>In the interest of giving the monkeys a fighting chance, I decided to restrict the output to one Shakespeare play: Pericles.</p>
+      <br>
+      <p>(My dad is a big Marlowe fan, and this is his favourite of his works.)</p>
+      <br>
       <p>Further acknowledgments:</p> 
       <ul>
         <li>
@@ -32,16 +38,20 @@
         </li>
       </ul> 
     </div>
-  </div>
+  </dialog>
+  <!-- MODAL END -->
 
   <div id="container">
+    <!-- LEFT SIDE/LIVE MONKEYS START -->
     <aside>
       <div id="left">
         <h2>Live monkeys:</h2>
         <div id="output"></div>
       </div>
     </aside>
+    <!-- LEFT SIDE/LIVE MONKEYS END -->
 
+    <!-- RIGHT SIDE START -->
     <main>
       <div id="right">
         <div id="stats">
@@ -61,13 +71,17 @@
         </div>
       </div>
     </main>
+    <!-- RIGHT SIDE END -->
   </div>
+  <!-- CONTAINER END -->
 
+  <!-- FOOTER START -->
   <footer>
     <p>Created by <a href="https://github.com/adnmzlz" target="_blank">adnmzlz</a> &copy; 2026</p>
     <p>Source text taken from <a href="https://www.folger.edu/explore/shakespeares-works/pericles/" target="_blank">The Folger Shakespeare Library</a> </p>
     <p>Capital letters provided by the shift key</p>
   </footer>
+  <!-- FOOTER END -->
 
   <script src="./JS/app.js" type="module"></script>
 </body>

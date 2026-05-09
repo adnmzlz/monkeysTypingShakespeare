@@ -33,16 +33,16 @@ const characters = [
 
 // About button - opens the modal
 aboutBtn.onclick = function() {
-  modal.style.display = "block";
+  modal.showModal();
 }
 // About modal - close button
 span.onclick = function() {
-  modal.style.display = "none";
+  modal.close();
 }
 // Close modal when clicking outside it
 window.onclick = function(event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    modal.close();
   }
 }
 
