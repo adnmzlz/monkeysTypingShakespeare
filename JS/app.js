@@ -12,6 +12,7 @@ const htmlOutput = document.getElementById("output");
 
 // For findHighlightIframe() function
 const iFrame = document.getElementById("iFrame");
+const iframeDoc = iFrame.contentDocument || iFrame.contentWindow.document;
 let ogIframeContent = null;
 
 let longestOutput = ''; // Longest collection of characters that exist within the play
@@ -78,13 +79,12 @@ function getReadableUptime() {
 }
 
 // Function to find and highlight the longestOutput
-function findHighlightIframe(longestOutput) {  
-  const innerDoc = iFrame.contentDocument || iFrame.contentWindow.document;
-  const body = innerDoc.body;
+function findHighlightIframe(longestOutput) {    
+  const body = iframeDoc.body;
 
   // Original iframe text to reset highlights
   if (!ogIframeContent ) {
-    ogIframeContent  = body.innerHTML;
+    ogIframeContent = body.innerHTML;
   }
   body.innerHTML = ogIframeContent;
 
@@ -104,7 +104,7 @@ function findHighlightIframe(longestOutput) {
   });
 
   //Scroll to the first match
-  const firstMatchElement = innerDoc.getElementById('first-match');
+  const firstMatchElement = iframeDoc.getElementById('first-match');
   if (firstMatchElement) {
     // block: 'center' so it doesn't hit the top of the frame
     firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -123,7 +123,7 @@ function run() {
       longestOutput = currentString;
       document.getElementById("longestText").textContent = longestOutput;
 
-      longestLength = output.length;
+      let longestLength = output.length;
       document.getElementById("longestLength").textContent = longestOutput.length;
 
       findHighlightIframe(longestOutput);
@@ -142,4 +142,9 @@ function run() {
   setTimeout(run, Math.max(10, Math.floor(Math.random() * 50)));
 }
 
-run();
+// Make sure iframe has loaded before running
+if (iframeDoc.readyState === 'complete') {
+  run();
+} else {
+  iFrame.addEventListener('load', run);
+}
