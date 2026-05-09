@@ -1,4 +1,3 @@
-- Highlight section of output containing longest
 - Update styling (esp modal)
 
 - Support days/years

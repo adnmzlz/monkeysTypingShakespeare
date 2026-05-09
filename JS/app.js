@@ -88,7 +88,7 @@ function findHighlightIframe(longestOutput) {
   }
   body.innerHTML = ogIframeContent;
 
-  // ESCAPE special regex characters (like ?, (, ), .) so they don't break the script
+  // ESCAPE special regex characters so they don't break the script
   const escapedOutput = longestOutput.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
   // Apply new highlight, we use a specific ID for the FIRST match to scroll to it
@@ -106,7 +106,6 @@ function findHighlightIframe(longestOutput) {
   //Scroll to the first match
   const firstMatchElement = iframeDoc.getElementById('first-match');
   if (firstMatchElement) {
-    // block: 'center' so it doesn't hit the top of the frame
     firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
@@ -134,9 +133,21 @@ function run() {
     document.getElementById("totalChars").textContent = totalCharacters;
   }
 
-  htmlOutput.textContent += currentString; // Update at the conclusion of the longest string - saves on performance and adds a bit of randomness to the monkeybashes.
-  htmlOutput.scrollTop = htmlOutput.scrollHeight; // Auto-scrolls the output as it's added for neatness.  Will find a way to toggle this so people can scroll up if they want.
-  currentString = ''; // Reset the current string
+  // Highlight added text if it matches the longestOutput, otherwise add the text unstyled
+  if (currentString.includes(longestOutput)) {
+    const highlighted = document.createElement('mark');
+    highlighted.textContent = longestOutput;
+    htmlOutput.appendChild(highlighted);
+
+    const lastChar = document.createTextNode(currentString.at(-1));
+    htmlOutput.appendChild(lastChar);
+  } else {
+    htmlOutput.appendChild(document.createTextNode(currentString)); 
+  }
+  
+  // Auto-scrolls the output as it's added
+  htmlOutput.scrollTop = htmlOutput.scrollHeight; 
+  currentString = ''; // Reset currentString
 
   // Avoid cpu meltage/add randomness to the monkeybashes.
   setTimeout(run, Math.max(10, Math.floor(Math.random() * 50)));
