@@ -48,11 +48,19 @@ window.onclick = function(event) {
 
 // Function to return uptime for us to display.
 function getReadableUptime() {
-  const totalSeconds = performance.now() / 1000
+  const totalSeconds = performance.now() / 1000;
   // const nodeTotalSeconds = process.uptime(); << for server
-  const hours = Math.floor(totalSeconds / 3600);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = Math.floor(totalSeconds % 60);
+
+  let dys = "";
+  if (days > 1) {
+    dys = days + " days, ";
+  } else if (days === 1) {
+    dys = days + " day, ";
+  }
   
   let hrs = "";
   if (hours < 10) {
@@ -75,7 +83,7 @@ function getReadableUptime() {
   secs = seconds;
   }
   
-  return `${hrs}:${mins}:${secs}`;
+  return `${dys}${hrs}:${mins}:${secs}`;
 }
 
 // Function to find and highlight the longestOutput

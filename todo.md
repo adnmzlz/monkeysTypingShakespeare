@@ -1,7 +1,5 @@
-
 - bug fix: sometimes text isn't highlighted in the iframe, but not always.  Seems to only happen in Firefox (Chrome seems to be fine).
 
-- Support days/years
 - Localstorage?
 
 - Commas on characters typed/longest match
@@ -17,3 +15,4 @@
 
 - Get this hosted
 - fix padding on output
+- Support years
