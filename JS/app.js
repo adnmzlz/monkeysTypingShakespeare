@@ -130,15 +130,15 @@ function run() {
       longestOutput = currentString;
       document.getElementById("longestText").textContent = longestOutput;
 
-      let longestLength = output.length;
-      document.getElementById("longestLength").textContent = longestOutput.length;
+      let longestLength = longestOutput.length;
+      document.getElementById("longestLength").textContent = longestLength.toLocaleString('en-US');
 
       findHighlightIframe(longestOutput);
     }
 
     currentString += characters[Math.floor(Math.random() * 74)];
     totalCharacters++;
-    document.getElementById("totalChars").textContent = totalCharacters;
+    document.getElementById("totalChars").textContent = totalCharacters.toLocaleString('en-US');
   }
 
   // Highlight added text if it matches the longestOutput, otherwise add the text unstyled
