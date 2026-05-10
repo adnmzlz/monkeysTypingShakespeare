@@ -34,7 +34,7 @@ body {
   background-color: rgb(253, 245, 245);
   border: 1px solid gray;
   border-radius: 5px;
-  box-shadow:0 1px 1px #c4c3c3
+  box-shadow: 0 1px 1px #c4c3c3;
 }
 
 .modal::backdrop {
