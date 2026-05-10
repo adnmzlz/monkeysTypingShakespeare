@@ -86,7 +86,7 @@ function getReadableUptime() {
   return `${dys}${hrs}:${mins}:${secs}`;
 }
 
-// Function to find and highlight the longestOutput
+// Function to find and highlight the longestOutput within the iframe
 function findHighlightIframe(longestOutput) {    
   const body = iframeDoc.body;
 
@@ -111,7 +111,7 @@ function findHighlightIframe(longestOutput) {
     return `<mark class="highlight">${match}</mark>`;
   });
 
-  //Scroll to the first match
+  // Scroll to the first match
   const firstMatchElement = iframeDoc.getElementById('first-match');
   if (firstMatchElement) {
     firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
